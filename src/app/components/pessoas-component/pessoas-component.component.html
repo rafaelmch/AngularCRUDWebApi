@@ -1,0 +1,78 @@
+<div style="padding-top: 20px;" class="container p-5">
+    <div class="border border-light rounded p-5" *ngIf="visibilidadeTabela">
+        <div>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="ExibirFormularioCadastro()">
+                Nova Pessoa
+            </button>
+        </div>
+
+        <hr/>
+
+        <table class="tblPessoas" *ngIf="pessoas">
+            <tr class="thead-light">
+                <th style="padding-left: 12px;">Nome</th>
+                <th style="padding-left: 12px;">Sobrenome</th>
+                <th style="padding-left: 12px;">Idade</th>
+                <th style="padding-left: 12px;">Profissao</th>
+                <th style="padding-left: 12px;" colspan="2">Ações</th>
+            </tr>
+
+            <tr *ngFor="let pessoa of pessoas">
+                <td>{{pessoa.nome}}</td>
+                <td>{{pessoa.sobrenome}}</td>
+                <td>{{pessoa.idade}}</td>
+                <td>{{pessoa.profissao}}</td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-outline-info" (click)="ExibirFormularioAtualizacao(pessoa.pessoaId)">
+                        Atualizar
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-outline-danger" (click)="ExcluirPessoa(pessoa.pessoaId)">
+                        Excluir
+                    </button>
+                </td>            
+            </tr>
+        </table>
+    </div>
+</div>
+
+<form [formGroup]="formulario" (ngSubmit)="EnviarFormulario()" *ngIf="visibilidadeFormulario"> 
+    <div class="container p-5">
+        <div class="row">
+            <div class="col-6 border border-light rounded p-5 shadow" *ngIf="formulario">
+                <h6>{{tituloFormulario}}</h6>
+                <hr/>
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" class="form-control form-control-sm" formControlName="nome">
+                </div>
+                <div class="form-group">
+                    <label>Sobrenome</label>
+                    <input type="text" class="form-control form-control-sm" formControlName="sobrenome">
+                </div>
+                <div class="form-group">
+                    <label>Idade</label>
+                    <input type="number" class="form-control form-control-sm" formControlName="idade">
+                </div>
+                <div class="form-group">
+                    <label>Profissão</label>
+                    <input type="text" class="form-control form-control-sm" formControlName="profissao">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <button class="btnSalvar" type="submit">
+                            Salvar
+                        </button>
+                        <button class="btnVoltar" type="button" (click)="Voltar()">
+                            Voltar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+  
